@@ -1,1 +1,1 @@
-# Accelerating Approximate Thompson Sampling \\ with Underdamped Langevin Monte Carlo
+# Accelerating Approximate Thompson Sampling with Underdamped Langevin Monte Carlo
