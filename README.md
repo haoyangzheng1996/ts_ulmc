@@ -10,7 +10,10 @@ For the results of our method, please run:
 ```
 python3 ts_underdamp.py
 ```
-
+For the baseline, please run:
+```
+python3 ts_overdamp.py
+```
 More will be updated soon.
 
 ## Contact
