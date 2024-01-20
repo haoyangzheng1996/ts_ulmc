@@ -6,7 +6,7 @@ Experiment code for "[TS-ULMC](https://www.sciencedirect.com/science/article/pii
 Please refer to "environment.yml" 
 
 ## Usage
-For the results of our method, please run:
+For our method, please run:
 ```
 python3 ts_underdamp.py
 ```
