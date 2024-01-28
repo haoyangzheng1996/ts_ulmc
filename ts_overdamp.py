@@ -1,15 +1,12 @@
 import random
 import numpy as np
 from tqdm import tqdm
-from datetime import datetime
-import matplotlib.pyplot as plt
 from model.flags import get_flags
-from model.event import plot_figs
-from model.langevin import over_damped_exact, over_damped_stochastic, under_damped_exact, under_damped_stochastic
+from model.langevin import over_damped as sgld
 
 
 def run_func(args):
-    # Hyperparameters
+    # Hyper parameters
     dim = args.dim
     batch = args.batch_size
     n_arms = args.n_arm
@@ -37,8 +34,7 @@ def run_func(args):
         observation.append([])
         current_position.append(prior_mean)
 
-    # n_rounds = 100
-    pbar = tqdm(range(n_rounds), dynamic_ncols=True, smoothing=0.1, desc='Underdamped Langevin')
+    pbar = tqdm(range(n_rounds), dynamic_ncols=True, smoothing=0.1, desc='Overdamped TS')
     for e in pbar:
         sampled_means = []
 
@@ -48,7 +44,7 @@ def run_func(args):
                     sampled_means.append(
                         np.random.multivariate_normal(prior_mean, prior_variance))  # No observation, sample from prior
                 else:
-                    sampled_mean = over_damped_stochastic(
+                    sampled_mean = sgld(
                         observation[arm], step_size, n_iterations, prior_mean, np.linalg.inv(prior_variance),
                         current_position[arm], batch_size=batch)
                     sampled_means.append(sampled_mean)
@@ -58,7 +54,7 @@ def run_func(args):
                 # Sample from posterior using Langevin dynamics
                 obs = np.random.multivariate_normal(true_means[arm], arm_covariances[arm])
                 observation[arm].append(obs)
-                sampled_mean = over_damped_stochastic(
+                sampled_mean = sgld(
                     observation[arm], step_size, n_iterations, prior_mean, np.linalg.inv(prior_variance),
                     current_position[arm], batch_size=batch)
                 sampled_means.append(sampled_mean)
@@ -89,6 +85,10 @@ def run_func(args):
 if __name__ == "__main__":
     # Get flags
     flags = get_flags()
+
+    # random seed
+    random.seed(flags.seed)
+    np.random.seed(flags.seed)
 
     # Get results
     run_func(flags)

@@ -1,15 +1,12 @@
 import random
 import numpy as np
 from tqdm import tqdm
-from datetime import datetime
-import matplotlib.pyplot as plt
 from model.flags import get_flags
-from model.event import plot_figs
-from model.langevin import over_damped_exact, over_damped_stochastic, under_damped_exact, under_damped_stochastic
+from model.langevin import under_damped as sgld
 
 
 def run_func(args):
-    # Hyperparameters
+    # Hyper parameters
     dim = args.dim
     gamma = args.gamma
     batch = args.batch_size
@@ -26,7 +23,6 @@ def run_func(args):
     idx = np.argsort(-np.linalg.norm(true_means, axis=1))
     true_means = true_means[idx].copy()
 
-    # Thompson Sampling with Underdamped Langevin dynamics
     counts = np.zeros(n_arms)  # number of times to play arm
     sum_rewards = np.zeros((n_arms, dim))
     choose_arm_logs = []
@@ -40,7 +36,7 @@ def run_func(args):
         current_position.append(prior_mean)
         current_velocity.append(np.zeros(prior_mean.shape))
 
-    pbar = tqdm(range(n_rounds), dynamic_ncols=True, smoothing=0.1, desc='Underdamped Langevin')
+    pbar = tqdm(range(n_rounds), dynamic_ncols=True, smoothing=0.1, desc='Underdamped TS')
     for e in pbar:
         sampled_means = []
 
@@ -50,22 +46,22 @@ def run_func(args):
                     sampled_means.append(
                         np.random.multivariate_normal(prior_mean, prior_variance))  # No observation, sample from prior
                 else:
-                    sampled_mean, vel = under_damped_stochastic(
+                    position, vel = sgld(
                         observation[arm], step_size, n_iterations, prior_mean, np.linalg.inv(prior_variance),
                         [current_position[arm], current_velocity[arm]], gamma=gamma, batch_size=batch)
-                    sampled_means.append(sampled_mean)
-                    current_position[arm] = sampled_mean
+                    sampled_means.append(position)
+                    current_position[arm] = position
                     current_velocity[arm] = vel
 
             else:
                 # Sample from posterior using Langevin dynamics
                 obs = np.random.multivariate_normal(true_means[arm], arm_covariances[arm])
                 observation[arm].append(obs)
-                sampled_mean, vel = under_damped_stochastic(
+                position, vel = sgld(
                     observation[arm], step_size, n_iterations, prior_mean, np.linalg.inv(prior_variance),
                     [current_position[arm], current_velocity[arm]], gamma=gamma, batch_size=batch)
-                sampled_means.append(sampled_mean)
-                current_position[arm] = sampled_mean
+                sampled_means.append(position)
+                current_position[arm] = position
                 current_velocity[arm] = vel
 
         chosen_arm = np.argmax([np.linalg.norm(mean) for mean in sampled_means])  # Select arm with highest norm
@@ -93,6 +89,10 @@ def run_func(args):
 if __name__ == "__main__":
     # Get flags
     flags = get_flags()
+
+    # random seed
+    random.seed(flags.seed)
+    np.random.seed(flags.seed)
 
     # Get results
     run_func(flags)
