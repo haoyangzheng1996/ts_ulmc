@@ -1,6 +1,6 @@
 # Accelerating Approximate Thompson Sampling with Underdamped Langevin Monte Carlo
 
-Experiment code for "[TS-ULMC](https://www.sciencedirect.com/science/article/pii/S0021999123008471)".
+Part of experimental code for "[TS-ULMC](https://arxiv.org/abs/2401.11665)".
 
 ## Prerequisites
 Please refer to "environment.yml" 
@@ -14,7 +14,7 @@ For the baseline, please run:
 ```
 python3 ts_overdamp.py
 ```
-More will be updated soon.
+More will be updated in the camera-ready version.
 
 ## Contact
 Haoyang Zheng, School of Mechanical Engineering, Purdue University
