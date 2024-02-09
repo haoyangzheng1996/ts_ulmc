@@ -3,12 +3,11 @@
 Part of experimental code for "[TS-ULMC](https://arxiv.org/abs/2401.11665)".
 
 ```
-@inproceedings{ts_ulmc,
+@article{ts_ulmc,
   title={Accelerating Approximate Thompson Sampling with Underdamped Langevin Monte Carlo},
   author={Zheng, Haoyang and Deng, Wei and Moya, Christian and Lin, Guang},
-  booktitle={International Conference on Artificial Intelligence and Statistics (AISTATS)},
-  year={2024},
-  organization={PMLR}
+  journal={arXiv preprint arXiv:2401.11665},
+  year={2024}
 }
 ```
 
