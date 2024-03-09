@@ -11,10 +11,10 @@ Part of experimental code for "[TS-ULMC](https://arxiv.org/abs/2401.11665)".
 }
 ```
 
-## Prerequisites
+# Prerequisites
 Please refer to "environment.yml" 
 
-## Usage
+# Usage
 For our method, please run:
 ```
 python3 ts_underdamp.py
@@ -40,7 +40,7 @@ Results:
 ![image](https://github.com/haoyangzheng1996/ts_ulmc/assets/38525155/45d343c0-97f8-4799-9dd2-e28502e778be)
 
 
-## Contact
+# Contact
 Haoyang Zheng, School of Mechanical Engineering, Purdue University
 
 Email: zheng528 at purdue dot edu
