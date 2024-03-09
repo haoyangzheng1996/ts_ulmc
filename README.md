@@ -30,7 +30,7 @@ Results:
 To see the results in the appendix, we first used [google-maps-scraper
 ](https://github.com/omkarcloud/google-maps-scraper) to collect Google Maps reviews from several restaurants.
 
-The data are saved in ./data/ as txt files.
+The data were further processed and saved in ./data/ as txt files.
 
 Then please run:
 ```
