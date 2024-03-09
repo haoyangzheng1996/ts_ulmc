@@ -26,7 +26,7 @@ python3 ts_overdamp.py
 Results:
 ![image](https://github.com/haoyangzheng1996/ts_ulmc/assets/38525155/6989cfa6-45a0-4b1f-ac53-9e85b55206b7)
 
-# Further example
+## Further example
 To see the results in the appendix, we first used "[google-maps-scraper
 ]([https://arxiv.org/abs/2401.11665](https://github.com/omkarcloud/google-maps-scraper))" to collect Google Maps reviews from several restaurants.
 
