@@ -37,7 +37,8 @@ Then please run:
 python3 restaurant_main.py --n_round 200 --batch_size 5 --gamma 2.0 --reward_size 10 --step_size 1e-2
 ```
 Results:
-![image](https://github.com/haoyangzheng1996/ts_ulmc/assets/38525155/46e11b95-ea20-483e-a5e8-4552affc45af)
+![image](https://github.com/haoyangzheng1996/ts_ulmc/assets/38525155/45d343c0-97f8-4799-9dd2-e28502e778be)
+
 
 ## Contact
 Haoyang Zheng, School of Mechanical Engineering, Purdue University
