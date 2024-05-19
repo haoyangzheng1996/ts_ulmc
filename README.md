@@ -1,7 +1,7 @@
 # Accelerating Approximate Thompson Sampling with Underdamped Langevin Monte Carlo
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/haoyangzheng1996/ts_ulmc/blob/main/LICENSE.md)
-[![Dependencies](https://img.shields.io/badge/Python-3.10.0-brightgreen)](https://github.com/haoyangzheng1996/ts_ulmc/blob/main/environment.yml)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-red.svg)](https://github.com/haoyangzheng1996/ts_ulmc/blob/main/LICENSE.md)
+[![Dependencies](https://img.shields.io/badge/Python-3.10.0-yellow)](https://github.com/haoyangzheng1996/ts_ulmc/blob/main/environment.yml)
+[![Paper](https://img.shields.io/badge/PRML-238:2611--2619-brightgreen)](https://proceedings.mlr.press/v238/zheng24b.html)
 
 Part of experimental code for "[TS-ULMC](https://arxiv.org/abs/2401.11665)".
 
