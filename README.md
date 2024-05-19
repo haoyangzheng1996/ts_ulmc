@@ -34,7 +34,7 @@ The data were further processed and saved in the folder "./data/" as txt files.
 
 Then please run:
 ```
-python3 restaurant_main.py --n_round 200 --batch_size 5 --reward_size 10 --step_size 1e-2
+python3 restaurant_plot.py --n_round 200 --batch_size 5 --reward_size 10 --step_size 1e-2
 ```
 Results:
 ![image](https://github.com/haoyangzheng1996/ts_ulmc/assets/38525155/45d343c0-97f8-4799-9dd2-e28502e778be)
