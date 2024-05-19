@@ -6,7 +6,7 @@
 Part of experimental code for "[TS-ULMC](https://arxiv.org/abs/2401.11665)".
 
 ```
-@article{ts_ulmc,
+@article{zheng2024accelerating,
   title={Accelerating Approximate Thompson Sampling with Underdamped Langevin Monte Carlo},
   author={Zheng, Haoyang and Deng, Wei and Moya, Christian and Lin, Guang},
   journal={arXiv preprint arXiv:2401.11665},
