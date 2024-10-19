@@ -2,7 +2,7 @@ import numpy as np
 import random
 
 
-def over_damped(observations, step_size, n_iterations, prior_mean, prior_variance_inv, current,
+def over_damped(observations, step_size, n_iterations, prior_mean, prior_variance_inv, current, n_round=1,
                 batch_size=10, prior_type=None):
     x_mean = current.copy()
 
@@ -12,26 +12,25 @@ def over_damped(observations, step_size, n_iterations, prior_mean, prior_varianc
             sub_observe = random.sample(observations, k=batch_size)
             try:
                 if prior_type is not None:
-                    gradient = n * (np.mean(sub_observe, axis=0) - x_mean)
+                    gradient = 1 * (x_mean - np.mean(sub_observe, axis=0))
                 else:
-                    gradient = -prior_variance_inv.dot(x_mean - prior_mean) + n * (
-                            np.mean(sub_observe, axis=0) - x_mean)
+                    gradient = prior_variance_inv.dot(x_mean - prior_mean) / n_round + 1 * (x_mean - np.mean(sub_observe, axis=0))
             except ValueError:
                 print("value error")
         elif n == 0:
-            gradient = -prior_variance_inv.dot(x_mean - prior_mean)
+            gradient = prior_variance_inv.dot(x_mean - prior_mean)
         else:
             if prior_type is not None:
-                gradient = n * (np.mean(observations, axis=0) - x_mean)
+                gradient = 1 * (x_mean - np.mean(observations, axis=0))
             else:
-                gradient = -prior_variance_inv.dot(x_mean - prior_mean) + n * (np.mean(observations, axis=0) - x_mean)
+                gradient = prior_variance_inv.dot(x_mean - prior_mean) / n_round + 1 * (x_mean - np.mean(observations, axis=0))
                 
         x_mean = x_mean - step_size * gradient + np.sqrt(2 * step_size) * np.random.randn(x_mean.shape[0])
 
     return x_mean
 
 
-def under_damped(observations, step_size, n_iterations, prior_mean, prior_variance_inv, current,
+def under_damped(observations, step_size, n_iterations, prior_mean, prior_variance_inv, current, n_round=1,
                  gamma=2, L=1, batch_size=10, prior_type=None):
 
     x_mean = current[0].copy()
@@ -45,19 +44,18 @@ def under_damped(observations, step_size, n_iterations, prior_mean, prior_varian
             sub_observe = random.sample(observations, k=batch_size)
             try:
                 if prior_type is not None:
-                    gradient = n * (np.mean(sub_observe, axis=0) - x_mean)
+                    gradient = 1 * (x_mean - np.mean(sub_observe, axis=0))
                 else:
-                    gradient = -prior_variance_inv.dot(x_mean - prior_mean) + n * (
-                            np.mean(sub_observe, axis=0) - x_mean)
+                    gradient = prior_variance_inv.dot(x_mean - prior_mean) / n_round + 1 * (x_mean - np.mean(sub_observe, axis=0))
             except ValueError:
                 print("value error")
         elif n == 0:
-            gradient = -prior_variance_inv.dot(x_mean - prior_mean)
+            gradient = prior_variance_inv.dot(x_mean - prior_mean)
         else:
             if prior_type is not None:
-                gradient = n * (np.mean(observations, axis=0) - x_mean)
+                gradient = 1 * (x_mean - np.mean(observations, axis=0))
             else:
-                gradient = -prior_variance_inv.dot(x_mean - prior_mean) + n * (np.mean(observations, axis=0) - x_mean)
+                gradient = prior_variance_inv.dot(x_mean - prior_mean) / n_round + 1 * (x_mean - np.mean(observations, axis=0))
 
         x_sub = x_mean + (1 - np.exp(-gamma * t)) * v_mean / gamma - (
                 t - (1 - np.exp(-gamma * t)) / gamma) * gradient * (gamma * L)
